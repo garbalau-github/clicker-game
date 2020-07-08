@@ -7,6 +7,9 @@ const earn = document.querySelector('#earn');
 // Footer logger
 const logger = document.querySelector('#info');
 
+// Save progress
+const save = document.querySelector('#save');
+
 // Level buildings buttons
 const clickLevelOne = document.querySelector('#click-level-one');
 const clickLevelTwo = document.querySelector('#click-level-two');
@@ -21,8 +24,13 @@ const levelThreeOutput = document.querySelector('#level-three-output');
 const levelFourOutput = document.querySelector('#level-four-output');
 const levelFiveOutput = document.querySelector('#level-five-output');
 
-// Current value
-var cash = 0;
+// Put value in localstorage
+var cash = localStorage.getItem('cash');
+cash = (cash != null) ? parseInt(cash) : 0;
+score.innerHTML = cash;
+save.addEventListener('click', () => {
+    localStorage.setItem('cash', cash);
+})
 
 // Event listeners
 earn.addEventListener('click', addToScore);
