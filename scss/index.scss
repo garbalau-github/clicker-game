@@ -1,9 +1,78 @@
 body {
     margin: 0;
-    padding: 20px;
+    padding: 40px;
     font-family: sans-serif;
+    background-color: #34495E;
+    color: #fff;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-size: 25px;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
 }
 
 footer {
-    font-size: 9px;
+    font-size: 20px;
+    text-align: center;
+
+    #info {
+        span {
+            color: #41B883;
+        }
+    }
+}
+
+#score {
+    font-size: 25px;
+}
+
+.earn-button {
+    padding: 15px 35px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #41B883;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 5px rgba(#22303f, 0.6);
+    transition: all .2s;
+
+    &:hover {
+        background-color: #41B883
+    }
+
+    &:active {
+        background-color: #41B883;
+        box-shadow: 0 5px #22303f;
+        transform: translateY(2px);
+    }
+}
+
+.building-buttons {
+    display: flex;
+    justify-content: space-around;
+
+    .building-button {
+        border: none;
+        outline: none;
+        background: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        color: #fff;
+        font-size: 25px;
+
+        .building-icon {
+            width: 90px;
+            height: 90px;
+            transition: all .3s;
+            &:hover {
+                transform: translate(0, -3px);
+                cursor: pointer;
+            }
+        }
+    }
 }

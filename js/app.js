@@ -1,64 +1,72 @@
-// DOM
+// Score field
 const score = document.querySelector('#score');
-const clickBtn = document.querySelector('#click-general');
-const clickFabric = document.querySelector('#click-fabric');
-const clickConstruction = document.querySelector('#click-construction');
-const fabricOutput = document.querySelector('#fab-val');
-const constructionOutput = document.querySelector('#con-val');
 
-// Current values
-var num = 0;
-var amountOfFabric = 0;
-var amountOfConstruction = 0;
+// Earn button
+const earn = document.querySelector('#earn');
+
+// Footer logger
+const logger = document.querySelector('#info');
+
+// Level buildings buttons
+const clickLevelOne = document.querySelector('#click-level-one');
+const clickLevelTwo = document.querySelector('#click-level-two');
+const clickLevelThree = document.querySelector('#click-level-three');
+const clickLevelFour = document.querySelector('#click-level-four');
+const clickLevelFive = document.querySelector('#click-level-five');
+
+// Outputs of levels
+const levelOneOutput = document.querySelector('#level-one-output');
+const levelTwoOutput = document.querySelector('#level-two-output');
+const levelThreeOutput = document.querySelector('#level-three-output');
+const levelFourOutput = document.querySelector('#level-four-output');
+const levelFiveOutput = document.querySelector('#level-five-output');
+
+// Current value
+var cash = 0;
 
 // Event listeners
-clickBtn.addEventListener('click', addToScore);
-clickFabric.addEventListener('click', useFabric);
-clickConstruction.addEventListener('click', useConstruction);
+earn.addEventListener('click', addToScore);
 
-// Add 1
-function addToScore() {
-    num += 1;
-    console.log(num);
-    score.innerHTML = num;
+// Each building calls a function
+clickLevelOne.addEventListener('click', () => {
+    getBuilding( 20, levelOneOutput, 1000 );
+});
+
+clickLevelTwo.addEventListener('click', () => {
+    getBuilding( 250, levelTwoOutput, 500 );
+});
+
+clickLevelThree.addEventListener('click', () => {
+    getBuilding( 1000, levelThreeOutput, 250 );
+});
+
+clickLevelFour.addEventListener('click', () => {
+    getBuilding( 5000, levelFourOutput, 100 );
+});
+
+clickLevelFive.addEventListener('click', () => {
+    getBuilding( 50000, levelFourOutput, 50 );
+});
+
+function addToScore () {
+    cash += 1;
+    score.innerHTML = cash;
 }
 
-// Use fabric to get +1/sec
-function useFabric() {
-    var fabricPrice = 10;
-    if (num > fabricPrice) {
-
-        console.log(`You can buy fabric, you have ${fabricPrice}$`)
-        num -= fabricPrice;
-        amountOfFabric += 1;
-        fabricOutput.innerHTML = amountOfFabric;
-
-        setInterval(function() {
-            num += 1;
-            score.innerHTML = num;
-        }, 1000);
-
+function getBuilding (price, output, time) {
+    if (cash > price) {
+        var amount = output.textContent;
+        cash -= price;
+        amount++;
+        output.innerHTML = amount;
+        setInterval(() =>{
+            cash += 1;
+            score.innerHTML = cash;
+        }, time);
     } else {
-        console.log(`You cant buy fabric, you need ${fabricPrice - num}$`)
-    }
-}
-
-// Use construction to get +4/sec
-function useConstruction() {
-    var constructionPrice = 100;
-    if (num > constructionPrice) {
-
-        console.log(`You can buy construction, you have ${constructionPrice}$`)
-        num -= constructionPrice;
-        amountOfConstruction += 1;
-        constructionOutput.innerHTML = amountOfConstruction;
-
-        setInterval(function() {
-            num += 2;
-            score.innerHTML = num;
-        }, 500);
-
-    } else {
-        console.log(`You cant buy construction, you need ${constructionPrice - num}$`)
+        logger.innerHTML = `You need <span>${price - cash}</span>$ to buy it...`
+        setTimeout(() => {
+            logger.innerHTML = ' ';
+        }, 2000);
     }
 }
